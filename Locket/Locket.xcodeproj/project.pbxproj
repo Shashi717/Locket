@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AA8E6E9202F941600A61A65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AA8E6E8202F941600A61A65 /* GoogleService-Info.plist */; };
+		56A2D8DA74935ED999FD5D22 /* Pods_Locket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00F86A738149B21EA0AB30F /* Pods_Locket.framework */; };
 		9B8FE6B6202F8DBD00D03CF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8FE6B5202F8DBD00D03CF1 /* AppDelegate.swift */; };
 		9B8FE6B8202F8DBD00D03CF1 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B8FE6B7202F8DBD00D03CF1 /* art.scnassets */; };
 		9B8FE6BD202F8DBD00D03CF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B8FE6BB202F8DBD00D03CF1 /* Main.storyboard */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1AA8E6E8202F941600A61A65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7D12946ABB50C96B82E6F9BF /* Pods-Locket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Locket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Locket/Pods-Locket.debug.xcconfig"; sourceTree = "<group>"; };
 		9B8FE6B2202F8DBD00D03CF1 /* Locket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Locket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8FE6B5202F8DBD00D03CF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B8FE6B7202F8DBD00D03CF1 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -24,6 +28,8 @@
 		9B8FE6C1202F8DBD00D03CF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B8FE6C3202F8DBD00D03CF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B8FE6C9202F8EA000D03CF1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		9E803EDEF1EDF8721DDCCDAD /* Pods-Locket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Locket.release.xcconfig"; path = "Pods/Target Support Files/Pods-Locket/Pods-Locket.release.xcconfig"; sourceTree = "<group>"; };
+		D00F86A738149B21EA0AB30F /* Pods_Locket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Locket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56A2D8DA74935ED999FD5D22 /* Pods_Locket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D49FA79C5F6609EBCCE9110 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7D12946ABB50C96B82E6F9BF /* Pods-Locket.debug.xcconfig */,
+				9E803EDEF1EDF8721DDCCDAD /* Pods-Locket.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		9B8FE6A9202F8DBD00D03CF1 = {
 			isa = PBXGroup;
 			children = (
 				9B8FE6B4202F8DBD00D03CF1 /* Locket */,
 				9B8FE6B3202F8DBD00D03CF1 /* Products */,
+				8D49FA79C5F6609EBCCE9110 /* Pods */,
+				DDDB1EEEC81BFAD7B7086017 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,8 +81,17 @@
 				9B8FE6BE202F8DBD00D03CF1 /* Assets.xcassets */,
 				9B8FE6C0202F8DBD00D03CF1 /* LaunchScreen.storyboard */,
 				9B8FE6C3202F8DBD00D03CF1 /* Info.plist */,
+				1AA8E6E8202F941600A61A65 /* GoogleService-Info.plist */,
 			);
 			path = Locket;
+			sourceTree = "<group>";
+		};
+		DDDB1EEEC81BFAD7B7086017 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D00F86A738149B21EA0AB30F /* Pods_Locket.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B8FE6C6202F8DBD00D03CF1 /* Build configuration list for PBXNativeTarget "Locket" */;
 			buildPhases = (
+				D2DFB23D271D4C746AF6BC6C /* [CP] Check Pods Manifest.lock */,
 				9B8FE6AE202F8DBD00D03CF1 /* Sources */,
 				9B8FE6AF202F8DBD00D03CF1 /* Frameworks */,
 				9B8FE6B0202F8DBD00D03CF1 /* Resources */,
+				94DF25C91FD513A82303829C /* [CP] Embed Pods Frameworks */,
+				1055604190F31B2734F17E28 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -128,12 +158,69 @@
 			files = (
 				9B8FE6B8202F8DBD00D03CF1 /* art.scnassets in Resources */,
 				9B8FE6C2202F8DBD00D03CF1 /* LaunchScreen.storyboard in Resources */,
+				1AA8E6E9202F941600A61A65 /* GoogleService-Info.plist in Resources */,
 				9B8FE6BF202F8DBD00D03CF1 /* Assets.xcassets in Resources */,
 				9B8FE6BD202F8DBD00D03CF1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1055604190F31B2734F17E28 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Locket/Pods-Locket-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94DF25C91FD513A82303829C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Locket/Pods-Locket-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Locket/Pods-Locket-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2DFB23D271D4C746AF6BC6C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Locket-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9B8FE6AE202F8DBD00D03CF1 /* Sources */ = {
@@ -276,6 +363,7 @@
 		};
 		9B8FE6C7202F8DBD00D03CF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D12946ABB50C96B82E6F9BF /* Pods-Locket.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -291,6 +379,7 @@
 		};
 		9B8FE6C8202F8DBD00D03CF1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E803EDEF1EDF8721DDCCDAD /* Pods-Locket.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
