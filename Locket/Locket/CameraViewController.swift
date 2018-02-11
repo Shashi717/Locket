@@ -10,7 +10,10 @@ import UIKit
 import SceneKit
 import ARKit
 import AVFoundation
+import FirebaseStorage
+import FirebaseDatabase
 import CoreLocation
+
 
 class CameraViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -112,11 +115,33 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    
+      var storRef:StorageReference!
+      var ref:DatabaseReference!
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
         dump(capturedImage)
+
+        let storageRef = Storage.storage().reference().child("theImage.png")
+        let uploadData = UIImagePNGRepresentation(capturedImage!)
+        storageRef.putData(uploadData!, metadata: nil)
+        
+        ref = Database.database().reference()
+        ref?.child("User").childByAutoId().setValue("user")
+        ref?.child("GeoLocation").childByAutoId().setValue("30,45")
+        
+        storageRef.getMetadata { (metadata, error) in
+            if let error = error {
+                print("error")
+            }else{
+                let urlUn = StorageMetadata.downloadURL(metadata!)
+                let url = urlUn()!.absoluteString
+                self.ref = Database.database().reference()
+                self.ref?.child("ImageLocation").childByAutoId().setValue(url)
+            }
+        }
+
         dump(location?.coordinate.longitude)
+
         
     }
     
