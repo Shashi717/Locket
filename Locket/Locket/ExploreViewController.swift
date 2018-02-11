@@ -10,8 +10,13 @@ import ARKit
 
 
 
-class ExploreViewController: UIViewController {
+class ExploreViewController: UIViewController,  DisplayPhotoDelegate {
+  
+    
+    
     var sceneView: ARSKView!
+    let image = UIImage()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let view = self.view as? ARSKView {
@@ -23,6 +28,14 @@ class ExploreViewController: UIViewController {
             view.presentScene(scene)
             view.showsFPS = true
             view.showsNodeCount = true
+        }
+        
+       
+    }
+    func displayPhoto(shouldDisplay: Bool) {
+        if shouldDisplay {
+            let vc = DisplayPhotoViewController()
+            self.present(vc, animated: true, completion: nil)
         }
     }
     
@@ -38,6 +51,7 @@ class ExploreViewController: UIViewController {
         }
     }
     
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
@@ -50,6 +64,7 @@ class ExploreViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let configuration = ARWorldTrackingConfiguration()
+       
         sceneView?.session.run(configuration)
     }
     
@@ -83,6 +98,12 @@ extension ExploreViewController: ARSKViewDelegate {
         pic.name = "heart"
         return pic
     }
+    
+    func displayPhoto (image: UIImage) {
+        let vc = DisplayPhotoViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
 }
     
 

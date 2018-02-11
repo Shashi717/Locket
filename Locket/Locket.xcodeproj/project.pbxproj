@@ -28,6 +28,7 @@
 		E6F9C124202FCB06008FA9F4 /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = E6F9C11D202FCB05008FA9F4 /* win.wav */; };
 		E6F9C125202FCB06008FA9F4 /* catchBugspray.wav in Resources */ = {isa = PBXBuildFile; fileRef = E6F9C11E202FCB05008FA9F4 /* catchBugspray.wav */; };
 		E6F9C12A202FE47C008FA9F4 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9C129202FE47B008FA9F4 /* Types.swift */; };
+		E6F9C12C2030104F008FA9F4 /* DisplayPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9C12B2030104F008FA9F4 /* DisplayPhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		E6F9C11D202FCB05008FA9F4 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
 		E6F9C11E202FCB05008FA9F4 /* catchBugspray.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = catchBugspray.wav; sourceTree = "<group>"; };
 		E6F9C129202FE47B008FA9F4 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		E6F9C12B2030104F008FA9F4 /* DisplayPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				9B8FE6C9202F8EA000D03CF1 /* MainViewController.swift */,
 				9B32E9E8202FB929003AB662 /* CameraViewController.swift */,
 				9B8FE6BB202F8DBD00D03CF1 /* Main.storyboard */,
+				E6F9C12B2030104F008FA9F4 /* DisplayPhotoViewController.swift */,
 				E6F9C10A202FB592008FA9F4 /* ExploreViewController.swift */,
 				E6F9C10C202FB5A9008FA9F4 /* ExploreScene.swift */,
 				E6F9C116202FC85D008FA9F4 /* LocketScene.sks */,
@@ -291,6 +294,7 @@
 				9B8FE6CA202F8EA000D03CF1 /* MainViewController.swift in Sources */,
 				9B32E9E9202FB929003AB662 /* CameraViewController.swift in Sources */,
 				9B32E9E7202FA3DC003AB662 /* MapViewController.swift in Sources */,
+				E6F9C12C2030104F008FA9F4 /* DisplayPhotoViewController.swift in Sources */,
 				E6F9C12A202FE47C008FA9F4 /* Types.swift in Sources */,
 				9B8FE6B6202F8DBD00D03CF1 /* AppDelegate.swift in Sources */,
 				E6F9C10D202FB5A9008FA9F4 /* ExploreScene.swift in Sources */,
