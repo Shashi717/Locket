@@ -7,16 +7,36 @@
 //
 
 import UIKit
+import Firebase
+import GoogleMaps
+import GooglePlaces
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let locationManager = CLLocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+        GMSServices.provideAPIKey("AIzaSyAEh19sc8dXPsNBn0aG2FMpwRHhOm6JheI")
+        GMSPlacesClient.provideAPIKey("AIzaSyAEh19sc8dXPsNBn0aG2FMpwRHhOm6JheI")
+//        location()
+        if window?.rootViewController as? UITabBarController != nil {
+            let tabBarController = window!.rootViewController as! UITabBarController
+            tabBarController.selectedIndex = 1 // Opens the 1st Tab
+        }
         return true
+    }
+    
+    func location() {
+//        locationManager.delegate = self
+//        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
