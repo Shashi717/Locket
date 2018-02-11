@@ -17,6 +17,17 @@
 		9B8FE6BF202F8DBD00D03CF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B8FE6BE202F8DBD00D03CF1 /* Assets.xcassets */; };
 		9B8FE6C2202F8DBD00D03CF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B8FE6C0202F8DBD00D03CF1 /* LaunchScreen.storyboard */; };
 		9B8FE6CA202F8EA000D03CF1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8FE6C9202F8EA000D03CF1 /* MainViewController.swift */; };
+		E6F9C10B202FB592008FA9F4 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9C10A202FB592008FA9F4 /* ExploreViewController.swift */; };
+		E6F9C10D202FB5A9008FA9F4 /* ExploreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9C10C202FB5A9008FA9F4 /* ExploreScene.swift */; };
+		E6F9C117202FC85D008FA9F4 /* LocketScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E6F9C116202FC85D008FA9F4 /* LocketScene.sks */; };
+		E6F9C11F202FCB05008FA9F4 /* hitBug.wav in Resources */ = {isa = PBXBuildFile; fileRef = E6F9C118202FCB04008FA9F4 /* hitBug.wav */; };
+		E6F9C120202FCB06008FA9F4 /* Attribution.md in Resources */ = {isa = PBXBuildFile; fileRef = E6F9C119202FCB04008FA9F4 /* Attribution.md */; };
+		E6F9C121202FCB06008FA9F4 /* sprayFirebug.wav in Resources */ = {isa = PBXBuildFile; fileRef = E6F9C11A202FCB05008FA9F4 /* sprayFirebug.wav */; };
+		E6F9C122202FCB06008FA9F4 /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = E6F9C11B202FCB05008FA9F4 /* lose.wav */; };
+		E6F9C123202FCB06008FA9F4 /* sprayBug.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E6F9C11C202FCB05008FA9F4 /* sprayBug.mp3 */; };
+		E6F9C124202FCB06008FA9F4 /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = E6F9C11D202FCB05008FA9F4 /* win.wav */; };
+		E6F9C125202FCB06008FA9F4 /* catchBugspray.wav in Resources */ = {isa = PBXBuildFile; fileRef = E6F9C11E202FCB05008FA9F4 /* catchBugspray.wav */; };
+		E6F9C12A202FE47C008FA9F4 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9C129202FE47B008FA9F4 /* Types.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +45,17 @@
 		9B8FE6C9202F8EA000D03CF1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9E803EDEF1EDF8721DDCCDAD /* Pods-Locket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Locket.release.xcconfig"; path = "Pods/Target Support Files/Pods-Locket/Pods-Locket.release.xcconfig"; sourceTree = "<group>"; };
 		D00F86A738149B21EA0AB30F /* Pods_Locket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Locket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6F9C10A202FB592008FA9F4 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		E6F9C10C202FB5A9008FA9F4 /* ExploreScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreScene.swift; sourceTree = "<group>"; };
+		E6F9C116202FC85D008FA9F4 /* LocketScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LocketScene.sks; sourceTree = "<group>"; };
+		E6F9C118202FCB04008FA9F4 /* hitBug.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitBug.wav; sourceTree = "<group>"; };
+		E6F9C119202FCB04008FA9F4 /* Attribution.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Attribution.md; sourceTree = "<group>"; };
+		E6F9C11A202FCB05008FA9F4 /* sprayFirebug.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sprayFirebug.wav; sourceTree = "<group>"; };
+		E6F9C11B202FCB05008FA9F4 /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
+		E6F9C11C202FCB05008FA9F4 /* sprayBug.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sprayBug.mp3; sourceTree = "<group>"; };
+		E6F9C11D202FCB05008FA9F4 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
+		E6F9C11E202FCB05008FA9F4 /* catchBugspray.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = catchBugspray.wav; sourceTree = "<group>"; };
+		E6F9C129202FE47B008FA9F4 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +105,17 @@
 				9B8FE6C9202F8EA000D03CF1 /* MainViewController.swift */,
 				9B32E9E8202FB929003AB662 /* CameraViewController.swift */,
 				9B8FE6BB202F8DBD00D03CF1 /* Main.storyboard */,
+				E6F9C10A202FB592008FA9F4 /* ExploreViewController.swift */,
+				E6F9C10C202FB5A9008FA9F4 /* ExploreScene.swift */,
+				E6F9C116202FC85D008FA9F4 /* LocketScene.sks */,
 				9B8FE6BE202F8DBD00D03CF1 /* Assets.xcassets */,
+				E6F9C129202FE47B008FA9F4 /* Types.swift */,
 				9B8FE6C0202F8DBD00D03CF1 /* LaunchScreen.storyboard */,
 				9B8FE6C3202F8DBD00D03CF1 /* Info.plist */,
 				9B32E9E4202F9D2E003AB662 /* GoogleService-Info.plist */,
 				9B32E9E6202FA3DC003AB662 /* MapViewController.swift */,
+				E6F9C11A202FCB05008FA9F4 /* sprayFirebug.wav */,
+				E6F9C128202FCB73008FA9F4 /* Sounds */,
 			);
 			path = Locket;
 			sourceTree = "<group>";
@@ -98,6 +126,19 @@
 				D00F86A738149B21EA0AB30F /* Pods_Locket.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6F9C128202FCB73008FA9F4 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				E6F9C119202FCB04008FA9F4 /* Attribution.md */,
+				E6F9C11E202FCB05008FA9F4 /* catchBugspray.wav */,
+				E6F9C118202FCB04008FA9F4 /* hitBug.wav */,
+				E6F9C11B202FCB05008FA9F4 /* lose.wav */,
+				E6F9C11C202FCB05008FA9F4 /* sprayBug.mp3 */,
+				E6F9C11D202FCB05008FA9F4 /* win.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,9 +203,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6F9C121202FCB06008FA9F4 /* sprayFirebug.wav in Resources */,
+				E6F9C125202FCB06008FA9F4 /* catchBugspray.wav in Resources */,
+				E6F9C11F202FCB05008FA9F4 /* hitBug.wav in Resources */,
+				E6F9C123202FCB06008FA9F4 /* sprayBug.mp3 in Resources */,
 				9B8FE6B8202F8DBD00D03CF1 /* art.scnassets in Resources */,
+				E6F9C120202FCB06008FA9F4 /* Attribution.md in Resources */,
 				9B8FE6C2202F8DBD00D03CF1 /* LaunchScreen.storyboard in Resources */,
+				E6F9C122202FCB06008FA9F4 /* lose.wav in Resources */,
 				9B8FE6BF202F8DBD00D03CF1 /* Assets.xcassets in Resources */,
+				E6F9C117202FC85D008FA9F4 /* LocketScene.sks in Resources */,
+				E6F9C124202FCB06008FA9F4 /* win.wav in Resources */,
 				9B8FE6BD202F8DBD00D03CF1 /* Main.storyboard in Resources */,
 				9B32E9E5202F9D2E003AB662 /* GoogleService-Info.plist in Resources */,
 			);
@@ -238,10 +287,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6F9C10B202FB592008FA9F4 /* ExploreViewController.swift in Sources */,
 				9B8FE6CA202F8EA000D03CF1 /* MainViewController.swift in Sources */,
 				9B32E9E9202FB929003AB662 /* CameraViewController.swift in Sources */,
 				9B32E9E7202FA3DC003AB662 /* MapViewController.swift in Sources */,
+				E6F9C12A202FE47C008FA9F4 /* Types.swift in Sources */,
 				9B8FE6B6202F8DBD00D03CF1 /* AppDelegate.swift in Sources */,
+				E6F9C10D202FB5A9008FA9F4 /* ExploreScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
