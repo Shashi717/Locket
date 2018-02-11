@@ -8,6 +8,7 @@
 
 import ARKit
 import UIKit
+import FirebaseDatabase
 
 protocol DisplayPhotoDelegate {
     func displayPhoto (shouldDisplay: Bool)
@@ -16,7 +17,8 @@ protocol DisplayPhotoDelegate {
 class ExploreScene: SKScene {
     
     var photoDelegate: DisplayPhotoDelegate?
-    var url: String!
+
+     var ref:DatabaseReference!
     
     var sceneView: ARSKView {
         return view as! ARSKView
@@ -140,9 +142,44 @@ class ExploreScene: SKScene {
             let location = touch.location(in: self)
             
             //            if self.nodeAtPoint(location) == self.WebButton{
-            UIApplication.shared.openURL(NSURL(string: "https://firebasestorage.googleapis.com/v0/b/locketinfo.appspot.com/o/theImage.png?alt=media&token=c5699f39-bb56-4f52-9b17-d9e25e9a85f9")! as URL)  //you can add your link here
-            //            }
+//            retrieveURLFromDatabase()
+            var url = "https://firebasestorage.googleapis.com/v0/b/locketinfo.appspot.com/o/theImage.png?alt=media&token=e68ec9c7-47e0-4117-9883-7f5ce07a8b08"
+            UIApplication.shared.openURL(NSURL(string: url as! String)! as URL)
+            
         }
+    }
+    
+    func retrieveURLFromDatabase() {
+        ref = Database.database().reference()
+        
+        
+        var newRef = ref.child("User").child("ImageLocation")
+        
+        
+        newRef.observeSingleEvent(of: .value) { (snapshot) in
+            print("------")
+            print(snapshot)
+             print("-------")
+        }
+        //The user have to provide the user part so they can access it
+       
+        
+        Database.database().reference().child("User").child("ImageLocation").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let url = snapshot.value {
+                print(url) // the url is the retrived value
+                
+                DispatchQueue.main.async {                   UIApplication.shared.openURL(NSURL(string: url as! String)! as URL)
+                }
+                 //you can add your link here
+                //            }
+                
+                //                self.getDataFromUrl(url: URL(string: url as! String)!, completion: {x,y,error in
+                //                    if error != nil {
+                //                        print(error)
+                //                    }
+                //                })
+            }
+        }, withCancel: nil)
     }
     
     
