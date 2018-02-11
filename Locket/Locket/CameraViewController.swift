@@ -15,7 +15,7 @@ import FirebaseDatabase
 import CoreLocation
 
 
-class CameraViewController: UIViewController, CLLocationManagerDelegate {
+class CameraViewController: UIViewController {
     
     @IBOutlet var captureButton: UIButton!
     @IBOutlet var swapButton: UIButton!
@@ -25,7 +25,6 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var previewView: UIView!
     @IBOutlet var tempImageView: UIImageView!
     
-    
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var stillImageOutput: AVCaptureStillImageOutput?
@@ -34,31 +33,14 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
     
     var usingFrontCamera = false
     
-    var locationManager = CLLocationManager()
-    var currentLocation: CLLocation?
-    var location: CLLocation?
-    //    var mapView: GMSMapView!
-    //    var placesClient: GMSPlacesClient!
     var zoomLevel: Float = 15.0
     
-    // An array to hold the list of likely places.
-    //    var likelyPlaces: [GMSPlace] = []
     
-    // The currently selected place.
-    //    var selectedPlace: GMSPlace?
+    var storRef:StorageReference!
+    var ref:DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        locationManager = CLLocationManager()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.distanceFilter = 50
-        locationManager.startUpdatingLocation()
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
-        
-        //        placesClient = GMSPlacesClient.shared()
         loadCamera()
     }
     
@@ -93,8 +75,8 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
                     let cgImageRef = CGImage.init(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
                     
                     self.capturedImage = UIImage (cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
-                    self.capturedImage = self.capturedImage?.resizeImage()
-                    
+
+              
                     self.tempImageView.image = self.capturedImage
                     self.tempImageView.isHidden = false
                     self.swapButton.isHidden = true
@@ -102,7 +84,6 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
                     self.addButton.isHidden = false
                     self.titleTextField.isHidden = false
                 }
-                
             })
         }
         
@@ -114,12 +95,9 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-      var storRef:StorageReference!
-      var ref:DatabaseReference!
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
         dump(capturedImage)
-        
 
         let storageRef = Storage.storage().reference().child("theImage.png")
         let uploadData = UIImagePNGRepresentation(capturedImage!)
@@ -130,18 +108,24 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
         ref?.child("GeoLocation").setValue("30,45")
         
         storageRef.getMetadata { (metadata, error) in
-            if let error = error {
+            if error != nil {
                 print("error")
-            }else{
+            }
+            else {
                 let urlUn = StorageMetadata.downloadURL(metadata!)
                 let url = urlUn()!.absoluteString
                 self.ref = Database.database().reference()
                 self.ref?.child("ImageLocation").setValue(url)
             }
         }
-
-        dump(location?.coordinate.longitude)
-
+        tempImageView.isHidden = true
+        previewView.isHidden = false
+        addButton.isHidden = true
+        titleTextField.isHidden = true
+        captureButton.isHidden = false
+        swapButton.isHidden = false
+        //        dump(location?.coordinate.longitude)
+        
         
     }
     
@@ -200,31 +184,29 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
         
-        // Handle incoming location events.
         
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             if let loc = locations.first {
                 print(loc.coordinate)
-                location = loc
+                
             }
         }
         
         // If we have been deined access give the user the option to change it
         func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
             if(status == CLAuthorizationStatus.denied) {
-//                showLocationDisabledPopUp()
+                //                showLocationDisabledPopUp()
             }
         }
-  
-
+        
+        
         
         // Handle location manager errors.
         func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-            self.locationManager.stopUpdatingLocation()
+            //            self.locationManager.stopUpdatingLocation()
             print("Error: \(error)")
         }
     }
-    
     
     
     // MARK: - ARSCNViewDelegate
@@ -238,14 +220,14 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
      }
      */
     
+    
 }
-
 extension UIImage{
     func resizeImage() -> UIImage {
-//        let horizontalRatio = CGSize(width: 100, height: 100)
-//        let verticalRatio = newSize.height / size.height
-//        let ratio = max(horizontalRatio, verticalRatio)
-        let newSize = CGSize(width: 100, height: 100)
+        //        let horizontalRatio = CGSize(width: 100, height: 100)
+        //        let verticalRatio = newSize.height / size.height
+        //        let ratio = max(horizontalRatio, verticalRatio)
+        let newSize = CGSize(width: 600, height: 600)
         UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
         draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -253,6 +235,8 @@ extension UIImage{
         return newImage!
     }
 }
+
+
 
 
 

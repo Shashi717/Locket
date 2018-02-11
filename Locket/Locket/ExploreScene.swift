@@ -7,15 +7,16 @@
 //
 
 import ARKit
+import UIKit
 
 protocol DisplayPhotoDelegate {
-    func displayPhoto (image: UIImage)
     func displayPhoto (shouldDisplay: Bool)
 }
 
 class ExploreScene: SKScene {
     
     var photoDelegate: DisplayPhotoDelegate?
+    var url: String!
     
     var sceneView: ARSKView {
         return view as! ARSKView
@@ -43,7 +44,7 @@ class ExploreScene: SKScene {
         isWorldSetUp = true
     }
     
-  
+    
     
     // this is called every frame
     override func update(_ currentTime: TimeInterval) {
@@ -74,25 +75,25 @@ class ExploreScene: SKScene {
     
     
     //
-//    var sight: SKSpriteNode!
-//
-//    override func didMove(to view: SKView) {
-//        sight = SKSpriteNode()
-//        addChild(sight)
-//    }
-
-//    override func touchesBegan(_ touches: Set<UITouch>,
-//                               with event: UIEvent?) {
-//        let location = sight.position
-//        let hitNodes = nodes(at: location)
-//
-//        var hitBug: SKNode?
-//        for node in hitNodes {
-//            if node.name == "heart" {
-//                hitBug = node
-//                break
-//            }
-//        }
+    //    var sight: SKSpriteNode!
+    //
+    //    override func didMove(to view: SKView) {
+    //        sight = SKSpriteNode()
+    //        addChild(sight)
+    //    }
+    
+    //    override func touchesBegan(_ touches: Set<UITouch>,
+    //                               with event: UIEvent?) {
+    //        let location = sight.position
+    //        let hitNodes = nodes(at: location)
+    //
+    //        var hitBug: SKNode?
+    //        for node in hitNodes {
+    //            if node.name == "heart" {
+    //                hitBug = node
+    //                break
+    //            }
+    //        }
     
     let touchSound = SKAction.playSoundFileNamed("sprayFirebug", waitForCompletion: false)
     
@@ -121,15 +122,29 @@ class ExploreScene: SKScene {
                 //Excecute the actions
                 node.run(sequenceAction)
                 
-        
             }
         }
         
     }
-    
-    let gameSize = CGSize(width: 2, height: 2)
 
-    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("ended")
+        
+        
+        //        let vc = ExploreViewController()
+        //
+        ////        vc.performSegue(withIdentifier: "displayViewSegue", sender: nil)
+        //        vc.displayPhoto(shouldDisplay: true)
+        //               self.photoDelegate?.displayPhoto(shouldDisplay: true)
+        
+        for touch in (touches ) {
+            let location = touch.location(in: self)
+            
+            //            if self.nodeAtPoint(location) == self.WebButton{
+            UIApplication.shared.openURL(NSURL(string: "https://firebasestorage.googleapis.com/v0/b/locketinfo.appspot.com/o/theImage.png?alt=media&token=c5699f39-bb56-4f52-9b17-d9e25e9a85f9")! as URL)  //you can add your link here
+            //            }
+        }
+    }
     
     
     //  private var label : SKLabelNode?
