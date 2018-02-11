@@ -46,14 +46,16 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+         locationManager.delegate = self
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestLocation()
         locationManager.requestWhenInUseAuthorization()
+        
         locationManager.distanceFilter = 50
         locationManager.startUpdatingLocation()
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
+       
+       
         
         //        placesClient = GMSPlacesClient.shared()
         loadCamera()
@@ -176,11 +178,19 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
         // Handle incoming location events.
         
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            if let loc = locations.first {
-                print(loc.coordinate)
+            if let loc = locations.last {
+                print("Found user's location: \(location)")
                 location = loc
             }
         }
+        
+       
+//        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//            if let loc = locations.first {
+//                print(loc.coordinate)
+//
+//            }
+//        }
         
         // If we have been deined access give the user the option to change it
         func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
