@@ -93,6 +93,7 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
                     let cgImageRef = CGImage.init(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
                     
                     self.capturedImage = UIImage (cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
+                    self.capturedImage?.resizeImage()
                     
                     self.tempImageView.image = self.capturedImage
                     self.tempImageView.isHidden = false
@@ -118,6 +119,7 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
         dump(capturedImage)
+        capturedImage.res
 
         let storageRef = Storage.storage().reference().child("theImage.png")
         let uploadData = UIImagePNGRepresentation(capturedImage!)
@@ -237,5 +239,21 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
      */
     
 }
+
+extension UIImage{
+    func resizeImage() -> UIImage {
+//        let horizontalRatio = CGSize(width: 100, height: 100)
+//        let verticalRatio = newSize.height / size.height
+//        let ratio = max(horizontalRatio, verticalRatio)
+        let newSize = CGSize(width: 100, height: 100)
+        UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
+        draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
+}
+
+
 
 

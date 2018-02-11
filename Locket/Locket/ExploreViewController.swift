@@ -94,7 +94,7 @@ extension ExploreViewController: ARSKViewDelegate {
     // attach a heart to anchor
     func view(_ view: ARSKView,
               nodeFor anchor: ARAnchor) -> SKNode? {
-        let pic = SKSpriteNode(imageNamed: "heart")
+        let pic = SKSpriteNode(imageNamed: "icon")
         pic.name = "heart"
         return pic
     }
