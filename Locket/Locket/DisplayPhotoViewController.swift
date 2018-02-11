@@ -11,9 +11,12 @@ import UIKit
 class DisplayPhotoViewController: UIViewController {
     @IBOutlet weak var displayImageView: UIImageView!
     
+    var message = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print(message)
         // Do any additional setup after loading the view.
     }
 
