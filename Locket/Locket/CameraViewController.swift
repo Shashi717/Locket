@@ -118,8 +118,8 @@ class CameraViewController: UIViewController {
         storageRef.putData(uploadData!, metadata: nil)
         
         ref = Database.database().reference()
-        ref?.child("User").childByAutoId().setValue("user")
-        ref?.child("GeoLocation").childByAutoId().setValue("30,45")
+        ref?.child("User").setValue("user")
+        ref?.child("GeoLocation").setValue("30,45")
         
         storageRef.getMetadata { (metadata, error) in
             if let error = error {
@@ -128,7 +128,7 @@ class CameraViewController: UIViewController {
                 let urlUn = StorageMetadata.downloadURL(metadata!)
                 let url = urlUn()!.absoluteString
                 self.ref = Database.database().reference()
-                self.ref?.child("ImageLocation").childByAutoId().setValue(url)
+                self.ref?.child("ImageLocation").setValue(url)
             }
         }
         
