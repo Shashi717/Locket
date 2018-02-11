@@ -7,12 +7,21 @@
 //
 
 import ARKit
-
+import FirebaseDatabase
 
 
 class ExploreViewController: UIViewController,  DisplayPhotoDelegate {
-  
-    
+    var ref:DatabaseReference!
+    func retrieveURLFromDatabase() {
+        ref = Database.database().reference().child("User").child("ImageLocation")
+        //The user have to provide the user part so they can access it
+        Database.database().reference().child("User").child("ImageLocation").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let url = snapshot.value {
+                print(url) // the url is the retrived value 
+            }
+        }, withCancel: nil)
+    }
+
     
     var sceneView: ARSKView!
     let image = UIImage()
