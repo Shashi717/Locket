@@ -10,8 +10,10 @@ import UIKit
 import SceneKit
 import ARKit
 import AVFoundation
+import GooglePlaces
+import GoogleMaps
 
-class CameraViewController: UIViewController {
+class CameraViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet var captureButton: UIButton!
     @IBOutlet var swapButton: UIButton!
@@ -30,29 +32,29 @@ class CameraViewController: UIViewController {
     
     var usingFrontCamera = false
     
-    var imagePicker: UIImagePickerController!
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocation?
+    var mapView: GMSMapView!
+    var placesClient: GMSPlacesClient!
+    var zoomLevel: Float = 15.0
+    
+    // An array to hold the list of likely places.
+    var likelyPlaces: [GMSPlace] = []
+    
+    // The currently selected place.
+    var selectedPlace: GMSPlace?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCamera()
-        //        captureDevice = AVCaptureDevice.default(for: .video )
-        //
-        //        do {
-        //            let input = try AVCaptureDeviceInput(device: captureDevice!)
-        //
-        //            captureSession = AVCaptureSession()
-        //            captureSession?.addInput(input)
-        //
-        //            videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
-        //            videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        //            videoPreviewLayer?.frame = view.layer.bounds
-        //            previewView.layer.addSublayer(videoPreviewLayer!)
-        //
-        //            captureSession?.startRunning()
-        //        } catch {
-        //            print(error)
-        //        }
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.distanceFilter = 50
+        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
         
+        placesClient = GMSPlacesClient.shared()
     }
     
     override func viewWillAppear(_ animated: Bool) {
