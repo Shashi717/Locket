@@ -17,6 +17,7 @@ class ExploreViewController: UIViewController,  DisplayPhotoDelegate, UIPopoverP
     
     var sceneView: ARSKView!
     let image = UIImage()
+//    var imageView = UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class ExploreViewController: UIViewController,  DisplayPhotoDelegate, UIPopoverP
             view.showsNodeCount = true
         }
     }
+    
     
     func displayPhoto(shouldDisplay: Bool) {
         if shouldDisplay {
@@ -65,9 +67,53 @@ class ExploreViewController: UIViewController,  DisplayPhotoDelegate, UIPopoverP
         Database.database().reference().child("User").child("ImageLocation").observeSingleEvent(of: .value, with: { (snapshot) in
             if let url = snapshot.value {
                 print(url) // the url is the retrived value
+            
+//                self.getDataFromUrl(url: URL(string: url as! String)!, completion: {x,y,error in
+//                    if error != nil {
+//                        print(error)
+//                    }
+//                })
             }
         }, withCancel: nil)
     }
+    
+    func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            completion(data, response, error)
+            }.resume()
+    }
+
+    
+    func downloadImage(url: URL) {
+        print("Download Started")
+        getDataFromUrl(url: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+//            DispatchQueue.main.async() {
+//                self.imageView.image = UIImage(data: data)
+//            }
+        }
+    }
+
+//    func downloadImage(url: URL) {
+//        print("Download Started")
+//        getDataFromUrl(url: url) { data, response, error in
+//            guard let data = data, error == nil else { return }
+//            print(response?.suggestedFilename ?? url.lastPathComponent)
+//            print("Download Finished")
+//            DispatchQueue.main.async() {
+//                self.imageView.image = UIImage(data: data)
+//            }
+//        }
+//    }
+//
+//    func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            completion(data, response, error)
+//            }.resume()
+//    }
+    
     override var shouldAutorotate: Bool {
         return true
     }
@@ -117,7 +163,10 @@ extension ExploreViewController: ARSKViewDelegate {
     // attach a heart to anchor
     func view(_ view: ARSKView,
               nodeFor anchor: ARAnchor) -> SKNode? {
-        
+        if let url = URL(string: "hhttps://firebasestorage.googleapis.com/v0/b/locketinfo.appspot.com/o/theImage.png?alt=media&token=6f01e52c-d00f-405d-aeb3-c2983461d6c8") {
+//            imageView.contentMode = .scaleAspectFit
+            downloadImage(url: url)
+        }
         let pic = SKSpriteNode(imageNamed: "heart")
         pic.name = "heart"
         return pic
