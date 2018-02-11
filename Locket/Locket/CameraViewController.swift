@@ -9,47 +9,165 @@
 import UIKit
 import SceneKit
 import ARKit
+import AVFoundation
 
-class CameraViewController: UIViewController, ARSCNViewDelegate {
+class CameraViewController: UIViewController {
     
-    @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet var captureButton: UIButton!
+    @IBOutlet var swapButton: UIButton!
+    @IBOutlet var addButton: UIButton!
+    
+    @IBOutlet var titleTextField: UITextField!
+    @IBOutlet var previewView: UIView!
+    @IBOutlet var tempImageView: UIImageView!
+    
+    
+    var captureSession: AVCaptureSession?
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    var stillImageOutput: AVCaptureStillImageOutput?
+    var captureDevice: AVCaptureDevice?
+    var capturedImage: UIImage?
+    
+    var usingFrontCamera = false
+    
+    var imagePicker: UIImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadCamera()
+        //        captureDevice = AVCaptureDevice.default(for: .video )
+        //
+        //        do {
+        //            let input = try AVCaptureDeviceInput(device: captureDevice!)
+        //
+        //            captureSession = AVCaptureSession()
+        //            captureSession?.addInput(input)
+        //
+        //            videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
+        //            videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        //            videoPreviewLayer?.frame = view.layer.bounds
+        //            previewView.layer.addSublayer(videoPreviewLayer!)
+        //
+        //            captureSession?.startRunning()
+        //        } catch {
+        //            print(error)
+        //        }
         
-        // Set the view's delegate
-        sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
-        
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // Set the scene to the view
-        sceneView.scene = scene
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
-        
-        // Run the view's session
-        sceneView.session.run(configuration)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        videoPreviewLayer!.frame = self.previewView.bounds
+        super.viewDidAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Pause the view's session
-        sceneView.session.pause()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
+    @IBAction func takePhotoTapped(_ sender: UIButton) {
+        
+        print("Tapped")
+        if let videoConnection = stillImageOutput?.connection(with: .video) {
+            
+            videoConnection.videoOrientation = AVCaptureVideoOrientation.portrait
+            stillImageOutput?.captureStillImageAsynchronously(from: videoConnection, completionHandler: {
+                
+                (sampleBuffer, error) in
+                if sampleBuffer != nil {
+                    
+                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer!)
+                    let dataProvider = CGDataProvider.init(data: imageData! as CFData)
+                    let cgImageRef = CGImage.init(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
+                    
+                    self.capturedImage = UIImage (cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
+                    
+                    self.tempImageView.image = self.capturedImage
+                    self.tempImageView.isHidden = false
+                    self.swapButton.isHidden = true
+                    self.captureButton.isHidden = true
+                    self.addButton.isHidden = false
+                    self.titleTextField.isHidden = false
+                }
+                
+            })
+        }
+        
+    }
+    
+    @IBAction func swapTapped(_ sender: UIButton) {
+        usingFrontCamera = !usingFrontCamera
+        loadCamera()
+        
+    }
+    
+    
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        
+        dump(capturedImage)
+        
+    }
+    
+    func getFrontCamera() -> AVCaptureDevice?{
+        let videoDevices = AVCaptureDevice.devices(for: .video)
+        
+        for device in videoDevices {
+            let device = device
+            if device.position == AVCaptureDevice.Position.front {
+                return device
+            }
+        }
+        return nil
+    }
+    
+    func getBackCamera() -> AVCaptureDevice{
+        return AVCaptureDevice.default(for: .video )!
+    }
+    func loadCamera() {
+        if(captureSession == nil){
+            captureSession = AVCaptureSession()
+            captureSession!.sessionPreset = AVCaptureSession.Preset.photo
+        }
+        var error: NSError?
+        var input: AVCaptureDeviceInput!
+        
+        captureDevice = (usingFrontCamera ? getFrontCamera() : getBackCamera())
+        
+        do {
+            input = try AVCaptureDeviceInput(device: captureDevice!)
+        } catch let error1 as NSError {
+            error = error1
+            input = nil
+            print(error!.localizedDescription)
+        }
+        
+        for i : AVCaptureDeviceInput in (self.captureSession?.inputs as! [AVCaptureDeviceInput]){
+            self.captureSession?.removeInput(i)
+        }
+        
+        if error == nil && captureSession!.canAddInput(input) {
+            captureSession!.addInput(input)
+            stillImageOutput = AVCaptureStillImageOutput()
+            stillImageOutput?.outputSettings = [AVVideoCodecKey: AVVideoCodecType.jpeg]
+            if captureSession!.canAddOutput(stillImageOutput!) {
+                captureSession!.addOutput(stillImageOutput!)
+                videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
+                videoPreviewLayer!.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                videoPreviewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+                //self.cameraPreviewSurface.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+                self.previewView.layer.addSublayer(videoPreviewLayer!)
+                DispatchQueue.main.async {
+                    self.captureSession!.startRunning()
+                }
+                
+            }
+        }
+        
     }
     
     // MARK: - ARSCNViewDelegate
@@ -63,20 +181,6 @@ class CameraViewController: UIViewController, ARSCNViewDelegate {
      }
      */
     
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
-    }
 }
 
 
