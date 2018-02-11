@@ -9,5 +9,7 @@ target 'Locket' do
   pod 'Firebase/Core'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
 
 end
