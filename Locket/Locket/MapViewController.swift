@@ -15,14 +15,14 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let camera = GMSCameraPosition.camera(withLatitude:87.59 , longitude: 41.80, zoom: 6.0)
+        let camera = GMSCameraPosition.camera(withLatitude:41.80 , longitude: -87.59, zoom: 6.0)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
         
         // Creates a marker in the center of the map.
         let marker = GMSMarker()
 //        41.7997° N, 87.5897° W
-        marker.position = CLLocationCoordinate2D(latitude: 87.59, longitude: 41.80)
+        marker.position = CLLocationCoordinate2D(latitude:41.80 , longitude: -87.59)
         marker.title = "Uncommon Hacks 2018"
         marker.snippet = "Polsky Exchange"
         marker.map = mapView
