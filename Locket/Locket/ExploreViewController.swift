@@ -24,9 +24,9 @@ class ExploreViewController: UIViewController,  DisplayPhotoDelegate, UIPopoverP
         retrieveURLFromDatabase()
         if let view = self.view as? ARSKView {
             let scene = ExploreScene(size: view.bounds.size)
-            if let urlString = url {
-                scene.url = urlString
-            }
+//            if let urlString = url {
+//                scene.url = urlString
+//            }
             sceneView = view
             sceneView!.delegate = self
             scene.scaleMode = .resizeFill

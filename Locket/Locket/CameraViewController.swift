@@ -76,7 +76,7 @@ class CameraViewController: UIViewController {
                     
                     self.capturedImage = UIImage (cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
               
-//                    self.capturedImage = self.capturedImage?.resizeImage()
+                    self.capturedImage = self.capturedImage?.resizeImage()
                     self.tempImageView.image = self.capturedImage
                     self.tempImageView.isHidden = false
                     self.swapButton.isHidden = true
@@ -105,7 +105,7 @@ class CameraViewController: UIViewController {
         
         ref = Database.database().reference()
         ref?.child("User").setValue("user")
-        ref?.child("GeoLocation").setValue("30,45")
+        ref?.child("GeoLocation").setValue("41.80,-87.59")
         
         storageRef.getMetadata { (metadata, error) in
             if error != nil {
