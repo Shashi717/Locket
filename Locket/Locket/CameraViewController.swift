@@ -12,8 +12,10 @@ import ARKit
 import AVFoundation
 import FirebaseStorage
 import FirebaseDatabase
+import CoreLocation
 
-class CameraViewController: UIViewController {
+
+class CameraViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet var captureButton: UIButton!
     @IBOutlet var swapButton: UIButton!
@@ -32,29 +34,32 @@ class CameraViewController: UIViewController {
     
     var usingFrontCamera = false
     
-    var imagePicker: UIImagePickerController!
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocation?
+    var location: CLLocation?
+    //    var mapView: GMSMapView!
+    //    var placesClient: GMSPlacesClient!
+    var zoomLevel: Float = 15.0
+    
+    // An array to hold the list of likely places.
+    //    var likelyPlaces: [GMSPlace] = []
+    
+    // The currently selected place.
+    //    var selectedPlace: GMSPlace?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadCamera()
-        //        captureDevice = AVCaptureDevice.default(for: .video )
-        //
-        //        do {
-        //            let input = try AVCaptureDeviceInput(device: captureDevice!)
-        //
-        //            captureSession = AVCaptureSession()
-        //            captureSession?.addInput(input)
-        //
-        //            videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
-        //            videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        //            videoPreviewLayer?.frame = view.layer.bounds
-        //            previewView.layer.addSublayer(videoPreviewLayer!)
-        //
-        //            captureSession?.startRunning()
-        //        } catch {
-        //            print(error)
-        //        }
         
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.distanceFilter = 50
+        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+        
+        //        placesClient = GMSPlacesClient.shared()
+        loadCamera()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,6 +118,7 @@ class CameraViewController: UIViewController {
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
         dump(capturedImage)
+
         let storageRef = Storage.storage().reference().child("theImage.png")
         let uploadData = UIImagePNGRepresentation(capturedImage!)
         storageRef.putData(uploadData!, metadata: nil)
@@ -131,6 +137,9 @@ class CameraViewController: UIViewController {
                 self.ref?.child("ImageLocation").setValue(url)
             }
         }
+
+        dump(location?.coordinate.longitude)
+
         
     }
     
@@ -189,7 +198,32 @@ class CameraViewController: UIViewController {
             }
         }
         
+        // Handle incoming location events.
+        
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            if let loc = locations.first {
+                print(loc.coordinate)
+                location = loc
+            }
+        }
+        
+        // If we have been deined access give the user the option to change it
+        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            if(status == CLAuthorizationStatus.denied) {
+//                showLocationDisabledPopUp()
+            }
+        }
+  
+
+        
+        // Handle location manager errors.
+        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+            self.locationManager.stopUpdatingLocation()
+            print("Error: \(error)")
+        }
     }
+    
+    
     
     // MARK: - ARSCNViewDelegate
     
