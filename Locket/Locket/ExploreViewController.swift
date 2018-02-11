@@ -7,48 +7,67 @@
 //
 
 import ARKit
+import FirebaseDatabase
 
-
-class ExploreViewController: UIViewController,  DisplayPhotoDelegate {
-  
-
+class ExploreViewController: UIViewController,  DisplayPhotoDelegate, UIPopoverPresentationControllerDelegate {
+    
+    var ref:DatabaseReference!
+    
+    var url: String!
+    
     var sceneView: ARSKView!
     let image = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        retrieveURLFromDatabase()
         if let view = self.view as? ARSKView {
+            let scene = ExploreScene(size: view.bounds.size)
+            if let urlString = url {
+                scene.url = urlString
+            }
             sceneView = view
             sceneView!.delegate = self
-            let scene = ExploreScene(size: view.bounds.size)
             scene.scaleMode = .resizeFill
             scene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             view.presentScene(scene)
             view.showsFPS = true
             view.showsNodeCount = true
-            
         }
-        
-       
     }
+    
     func displayPhoto(shouldDisplay: Bool) {
         if shouldDisplay {
             print("gjhghjghjgjgj")
             
-////            self.presentViewController(vc, animated: true, completion: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "DisplayVC") as! DisplayPhotoViewController
-////            let vc = DisplayPhotoViewController()
-//
-            self.present(DisplayPhotoViewController(), animated: true, completion: nil)
+            ////            self.presentViewController(vc, animated: true, completion: nil)
+            //            let vc = storyboard.instantiateViewController(withIdentifier: "DisplayVC") as! DisplayPhotoViewController
+            ////            let vc = DisplayPhotoViewController()
             
-            
-            
-//            self.performSegue(withIdentifier: "displayViewSegue", sender: self)
-            
-    
+            if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DisplayVC") as? DisplayPhotoViewController {
+                //                viewController.newsObj = newsObj
+                //                if let navigator = navigationController {
+                
+                self.navigationController?.pushViewController(viewController, animated: true)
+                //                }
+            }
+            //
+            //            let navVC = UINavigationController(rootViewController: ExploreViewController())
+            //            navVC.pushViewController(DisplayPhotoViewController(), animated: true)
+            //            self.present(navVC, animated: true, completion: nil)
+            //
         }
     }
     
+    func retrieveURLFromDatabase() {
+        ref = Database.database().reference().child("User").child("ImageLocation")
+        //The user have to provide the user part so they can access it
+        Database.database().reference().child("User").child("ImageLocation").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let url = snapshot.value {
+                print(url) // the url is the retrived value
+            }
+        }, withCancel: nil)
+    }
     override var shouldAutorotate: Bool {
         return true
     }
@@ -68,7 +87,7 @@ class ExploreViewController: UIViewController,  DisplayPhotoDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let configuration = ARWorldTrackingConfiguration()
-       
+        
         sceneView?.session.run(configuration)
     }
     
@@ -98,31 +117,32 @@ extension ExploreViewController: ARSKViewDelegate {
     // attach a heart to anchor
     func view(_ view: ARSKView,
               nodeFor anchor: ARAnchor) -> SKNode? {
+        
         let pic = SKSpriteNode(imageNamed: "heart")
         pic.name = "heart"
         return pic
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "displayViewSegue" {
-            if let vc = segue.destination as? DisplayPhotoViewController {
-                vc.message = true
-            }
-        }
-    }
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //
+    //        if segue.identifier == "displayViewSegue" {
+    //            if let vc = segue.destination as? DisplayPhotoViewController {
+    //                vc.message = true
+    //            }
+    //        }
+    //    }
     
     
 }
-    
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
 
