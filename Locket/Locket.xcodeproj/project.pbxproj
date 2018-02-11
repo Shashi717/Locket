@@ -10,6 +10,7 @@
 		56A2D8DA74935ED999FD5D22 /* Pods_Locket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00F86A738149B21EA0AB30F /* Pods_Locket.framework */; };
 		9B32E9E5202F9D2E003AB662 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B32E9E4202F9D2E003AB662 /* GoogleService-Info.plist */; };
 		9B32E9E7202FA3DC003AB662 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B32E9E6202FA3DC003AB662 /* MapViewController.swift */; };
+		9B32E9E9202FB929003AB662 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B32E9E8202FB929003AB662 /* CameraViewController.swift */; };
 		9B8FE6B6202F8DBD00D03CF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8FE6B5202F8DBD00D03CF1 /* AppDelegate.swift */; };
 		9B8FE6B8202F8DBD00D03CF1 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B8FE6B7202F8DBD00D03CF1 /* art.scnassets */; };
 		9B8FE6BD202F8DBD00D03CF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B8FE6BB202F8DBD00D03CF1 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		7D12946ABB50C96B82E6F9BF /* Pods-Locket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Locket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Locket/Pods-Locket.debug.xcconfig"; sourceTree = "<group>"; };
 		9B32E9E4202F9D2E003AB662 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9B32E9E6202FA3DC003AB662 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		9B32E9E8202FB929003AB662 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		9B8FE6B2202F8DBD00D03CF1 /* Locket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Locket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8FE6B5202F8DBD00D03CF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B8FE6B7202F8DBD00D03CF1 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				9B8FE6B5202F8DBD00D03CF1 /* AppDelegate.swift */,
 				9B8FE6B7202F8DBD00D03CF1 /* art.scnassets */,
 				9B8FE6C9202F8EA000D03CF1 /* MainViewController.swift */,
+				9B32E9E8202FB929003AB662 /* CameraViewController.swift */,
 				9B8FE6BB202F8DBD00D03CF1 /* Main.storyboard */,
 				E6F9C10A202FB592008FA9F4 /* ExploreViewController.swift */,
 				E6F9C10C202FB5A9008FA9F4 /* ExploreScene.swift */,
@@ -286,6 +289,7 @@
 			files = (
 				E6F9C10B202FB592008FA9F4 /* ExploreViewController.swift in Sources */,
 				9B8FE6CA202F8EA000D03CF1 /* MainViewController.swift in Sources */,
+				9B32E9E9202FB929003AB662 /* CameraViewController.swift in Sources */,
 				9B32E9E7202FA3DC003AB662 /* MapViewController.swift in Sources */,
 				E6F9C12A202FE47C008FA9F4 /* Types.swift in Sources */,
 				9B8FE6B6202F8DBD00D03CF1 /* AppDelegate.swift in Sources */,
