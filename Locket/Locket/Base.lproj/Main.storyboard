@@ -138,7 +138,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C13-GV-rpT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800" y="1061"/>
+            <point key="canvasLocation" x="800" y="1187"/>
+        </scene>
+        <!--Display Photo View Controller-->
+        <scene sceneID="ayY-Q7-cV4">
+            <objects>
+                <viewController storyboardIdentifier="DisplayVC" id="aMi-Js-Y3Q" customClass="DisplayPhotoViewController" customModule="Locket" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HLd-SL-y6V">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6yu-w7-4Mg">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6yu-w7-4Mg" firstAttribute="leading" secondItem="NH5-qf-IxP" secondAttribute="leading" id="3MC-5M-2NP"/>
+                            <constraint firstItem="NH5-qf-IxP" firstAttribute="trailing" secondItem="6yu-w7-4Mg" secondAttribute="trailing" id="FiV-SZ-tOI"/>
+                            <constraint firstItem="6yu-w7-4Mg" firstAttribute="top" secondItem="NH5-qf-IxP" secondAttribute="top" id="ScJ-lO-ycS"/>
+                            <constraint firstItem="NH5-qf-IxP" firstAttribute="bottom" secondItem="6yu-w7-4Mg" secondAttribute="bottom" id="hNQ-E2-S1v"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="NH5-qf-IxP"/>
+                    </view>
+                    <connections>
+                        <outlet property="displayImageView" destination="6yu-w7-4Mg" id="Hdm-pO-1hF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ak2-yj-p6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1657" y="1060"/>
         </scene>
         <!--Map-->
         <scene sceneID="aWL-I5-du4">

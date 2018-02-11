@@ -8,13 +8,22 @@
 
 import ARKit
 
+protocol DisplayPhotoDelegate {
+    func displayPhoto (shouldDisplay: Bool)
+}
+
 class ExploreScene: SKScene {
+    
+    var photoDelegate: DisplayPhotoDelegate?
     
     var sceneView: ARSKView {
         return view as! ARSKView
     }
     
     var isWorldSetUp = false
+    
+    var image = UIImage()
+    
     
     // Adding a picture
     private func setUpWorld() {
@@ -32,6 +41,8 @@ class ExploreScene: SKScene {
         
         isWorldSetUp = true
     }
+    
+  
     
     // this is called every frame
     override func update(_ currentTime: TimeInterval) {
@@ -74,7 +85,7 @@ class ExploreScene: SKScene {
 //        let location = sight.position
 //        let hitNodes = nodes(at: location)
 //
-        var hitBug: SKNode?
+//        var hitBug: SKNode?
 //        for node in hitNodes {
 //            if node.name == "heart" {
 //                hitBug = node
@@ -95,32 +106,32 @@ class ExploreScene: SKScene {
         let hit = nodes(at: location)
         // Get the first node (if any)
         if let node = hit.first {
-            // Check if the node is a ghost (remember that labels are also a node)
+            // Check if the node is a memory (remember that labels are also a node)
             if node.name == "heart" {
                 print ("touched")
                 let fadeOut = SKAction.fadeOut(withDuration: 0.5)
                 let remove = SKAction.removeFromParent()
                 
                 // Group the fade out and sound actions
-                let groupKillingActions = SKAction.group([fadeOut, touchSound])
+                let groupActions = SKAction.group([fadeOut, touchSound])
                 // Create an action sequence
-                let sequenceAction = SKAction.sequence([groupKillingActions, remove])
+                let sequenceAction = SKAction.sequence([groupActions, remove])
                 //Excecute the actions
                 node.run(sequenceAction)
+                
+         
+                
             }
         }
         
-//        run(Sounds.hit)
-//        if let hitBug = hitBug,
-//            let anchor = sceneView.anchor(for: hitBug) {
-//            let action = SKAction.run {
-//                self.sceneView.session.remove(anchor: anchor)
-//            }
-//            let group = SKAction.group([Sounds.hit, action])
-//            let sequence = [SKAction.wait(forDuration: 0.3), group]
-//            hitBug.run(SKAction.sequence(sequence))
-//        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("ended")
         
+        let vc = ExploreViewController()
+        vc.displayPhoto(shouldDisplay: true)
+               self.photoDelegate?.displayPhoto(shouldDisplay: true)
     }
     
     let gameSize = CGSize(width: 2, height: 2)

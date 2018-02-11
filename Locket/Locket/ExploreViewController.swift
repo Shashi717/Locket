@@ -8,8 +8,13 @@
 
 import ARKit
 
-class ExploreViewController: UIViewController {
+
+class ExploreViewController: UIViewController,  DisplayPhotoDelegate {
+  
+
     var sceneView: ARSKView!
+    let image = UIImage()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let view = self.view as? ARSKView {
@@ -21,6 +26,26 @@ class ExploreViewController: UIViewController {
             view.presentScene(scene)
             view.showsFPS = true
             view.showsNodeCount = true
+            
+        }
+        
+       
+    }
+    func displayPhoto(shouldDisplay: Bool) {
+        if shouldDisplay {
+            print("gjhghjghjgjgj")
+            
+////            self.presentViewController(vc, animated: true, completion: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "DisplayVC") as! DisplayPhotoViewController
+////            let vc = DisplayPhotoViewController()
+//
+            self.present(DisplayPhotoViewController(), animated: true, completion: nil)
+            
+            
+            
+//            self.performSegue(withIdentifier: "displayViewSegue", sender: self)
+            
+    
         }
     }
     
@@ -36,11 +61,6 @@ class ExploreViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
-    }
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -48,6 +68,7 @@ class ExploreViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let configuration = ARWorldTrackingConfiguration()
+       
         sceneView?.session.run(configuration)
     }
     
@@ -81,6 +102,17 @@ extension ExploreViewController: ARSKViewDelegate {
         pic.name = "heart"
         return pic
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "displayViewSegue" {
+            if let vc = segue.destination as? DisplayPhotoViewController {
+                vc.message = true
+            }
+        }
+    }
+    
+    
 }
     
 

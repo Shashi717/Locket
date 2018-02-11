@@ -15,7 +15,7 @@ import FirebaseDatabase
 import CoreLocation
 
 
-class CameraViewController: UIViewController, CLLocationManagerDelegate {
+class CameraViewController: UIViewController {
     
     @IBOutlet var captureButton: UIButton!
     @IBOutlet var swapButton: UIButton!
@@ -34,13 +34,18 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
     
     var usingFrontCamera = false
     
-    var locationManager = CLLocationManager()
-    var currentLocation: CLLocation?
-    var location: CLLocation?
+//    var locationManager = CLLocationManager()
+//    var currentLocation: CLLocation?
+//    var location: CLLocation?
+    
+    
     //    var mapView: GMSMapView!
     //    var placesClient: GMSPlacesClient!
     var zoomLevel: Float = 15.0
     
+    
+    var storRef:StorageReference!
+    var ref:DatabaseReference!
     // An array to hold the list of likely places.
     //    var likelyPlaces: [GMSPlace] = []
     
@@ -49,14 +54,14 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         locationManager.delegate = self
-        locationManager = CLLocationManager()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestLocation()
-        locationManager.requestWhenInUseAuthorization()
-        
-        locationManager.distanceFilter = 50
-        locationManager.startUpdatingLocation()
+//         locationManager.delegate = self
+//        locationManager = CLLocationManager()
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.requestLocation()
+//        locationManager.requestWhenInUseAuthorization()
+//
+//        locationManager.distanceFilter = 50
+//        locationManager.startUpdatingLocation()
        
        
         
@@ -115,8 +120,7 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-      var storRef:StorageReference!
-      var ref:DatabaseReference!
+
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
         dump(capturedImage)
@@ -140,7 +144,7 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
 
-        dump(location?.coordinate.longitude)
+//        dump(location?.coordinate.longitude)
 
         
     }
@@ -202,20 +206,20 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
         
         // Handle incoming location events.
         
-        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            if let loc = locations.last {
-                print("Found user's location: \(location)")
-                location = loc
-            }
-        }
-        
-       
 //        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//            if let loc = locations.first {
-//                print(loc.coordinate)
-//
+//            if let loc = locations.last {
+//                print("Found user's location: \(location)")
+//                location = loc
 //            }
 //        }
+//        
+       
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            if let loc = locations.first {
+                print(loc.coordinate)
+
+            }
+        }
         
         // If we have been deined access give the user the option to change it
         func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -228,7 +232,7 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
         
         // Handle location manager errors.
         func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-            self.locationManager.stopUpdatingLocation()
+//            self.locationManager.stopUpdatingLocation()
             print("Error: \(error)")
         }
     }
