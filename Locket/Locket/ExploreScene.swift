@@ -95,6 +95,7 @@ class ExploreScene: SKScene {
 //        }
     
     let touchSound = SKAction.playSoundFileNamed("sprayFirebug", waitForCompletion: false)
+    
     override func touchesBegan(_ touches: Set<UITouch>,
                                with event: UIEvent?) {
         // Get the first touch
