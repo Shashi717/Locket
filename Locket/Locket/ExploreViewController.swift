@@ -8,8 +8,6 @@
 
 import ARKit
 
-
-
 class ExploreViewController: UIViewController {
     var sceneView: ARSKView!
     override func viewDidLoad() {
